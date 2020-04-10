@@ -45,5 +45,7 @@ int main()
 		file2 << s2;
 	}
 	else cout << "Udalenie ne vozmozhno, dlina stroki: "<<c << endl;
+	file1.close();
+	file2.close();
 }
 
