@@ -1,0 +1,9 @@
+#pragma once
+void addfilm();
+void deletefilm();
+void searchfilm();
+void searchfilm_name();
+void searchfilm_genre();
+void listfilm();
+void changefilm();
+int menu_select();
