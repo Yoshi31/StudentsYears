@@ -18,7 +18,7 @@ public:
     int GetPrice();
     void ScanFilm();
     void Print();
-    void Putinfile();
+    void Putinfile(string fileName);
     friend ostream& operator << (ostream& os, const Film& film);
     friend istream& operator >> (istream& is, Film& film);
 };
