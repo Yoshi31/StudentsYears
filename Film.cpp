@@ -54,6 +54,7 @@ void Film::Putinfile(string fileName) {
     file.open(fileName, ios_base::app);
     if (!file) {
         cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        return;
     }
     file << name << " ";
     file << genre << " ";
