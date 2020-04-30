@@ -7,34 +7,34 @@ string genre_value;
 float ratting_value;
 int price_value;
 
-void addfilm() {
+void addfilm(string fileName) {
     Film* film;
     film = new Film;
     film->ScanFilm();
     int c;
-    cout << "Âû äåéñòèòåëüíî õîòèòå äîáàâèòü ýòîò ôèëüì?" << endl;
+    cout << "Ã‚Ã» Ã¤Ã¥Ã©Ã±Ã²Ã¨Ã²Ã¥Ã«Ã¼Ã­Ã® ÃµÃ®Ã²Ã¨Ã²Ã¥ Ã¤Ã®Ã¡Ã Ã¢Ã¨Ã²Ã¼ Ã½Ã²Ã®Ã² Ã´Ã¨Ã«Ã¼Ã¬?" << endl;
     film->Print();
-    cout << "1)Äà" << endl << "2)Íåò" << endl;
+    cout << "1)Ã„Ã " << endl << "2)ÃÃ¥Ã²" << endl;
     cin >> c;
     switch (c)
     {
     case 1:
-        film->Putinfile();
-        cout << "Ôèëüì óñïåøíî äîáàâëåí â áàçó äàííûõ êèíîòåàòðà" << endl;
+        film->Putinfile(string(argv[1]));
+        cout << "Ã”Ã¨Ã«Ã¼Ã¬ Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¥Ã­ Ã¢ Ã¡Ã Ã§Ã³ Ã¤Ã Ã­Ã­Ã»Ãµ ÃªÃ¨Ã­Ã®Ã²Ã¥Ã Ã²Ã°Ã " << endl;
         break;
     case 2:
-        cout << "Ôèëüì íå áóäåò äîáàâëåí â áàçó äàííûõ êèíîòåàòðà";
+        cout << "Ã”Ã¨Ã«Ã¼Ã¬ Ã­Ã¥ Ã¡Ã³Ã¤Ã¥Ã² Ã¤Ã®Ã¡Ã Ã¢Ã«Ã¥Ã­ Ã¢ Ã¡Ã Ã§Ã³ Ã¤Ã Ã­Ã­Ã»Ãµ ÃªÃ¨Ã­Ã®Ã²Ã¥Ã Ã²Ã°Ã ";
         exit(0);
     default:
-        cout << "Îøèáêà" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ " << endl;
 
     }
     delete film;
 
 }
 
-void deletefilm() {
-    cout << "Ââåäèòå íàçâàíèå ôèëüìà äëÿ óäàëåíèÿ" << endl;
+void deletefilm(string fileName) {
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã¤Ã«Ã¿ Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¿" << endl;
     string deletename;
     string archiv;
     cin >> deletename;
@@ -42,9 +42,10 @@ void deletefilm() {
     int n, s = 0;
     Film *film;
     film = new Film;
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file.seekg(0, ios_base::end);
     n = file.tellg();
@@ -68,50 +69,52 @@ void deletefilm() {
 
     } while (s < n - 4);
     file.close();
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file << archiv;
     file.close();
-    cout << "Ôèëüì áûë óñïåøíî óäàëåí!" << endl;
+    cout << "Ã”Ã¨Ã«Ã¼Ã¬ Ã¡Ã»Ã« Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã³Ã¤Ã Ã«Ã¥Ã­!" << endl;
 }
 
 void searchfilm() {
-    cout << "Ïîèñê ôèëüìîâ ïî:" << endl << "1)Íàçâàíèþ" << endl << "2)Æàíðó" << endl;
+    cout << "ÃÃ®Ã¨Ã±Ãª Ã´Ã¨Ã«Ã¼Ã¬Ã®Ã¢ Ã¯Ã®:" << endl << "1)ÃÃ Ã§Ã¢Ã Ã­Ã¨Ã¾" << endl << "2)Ã†Ã Ã­Ã°Ã³" << endl;
     int c;
     cin >> c;
     switch (c)
     {
     case 1:
-        searchfilm_name();
+        searchfilm_name(string(argv[1]));
         break;
     case 2:
-        searchfilm_genre();
+        searchfilm_genre(string(argv[1]));
         break;
     default:
-        cout << "Îøèáêà" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ " << endl;
 
     }
 }
 
-void searchfilm_name() {
+void searchfilm_name(string fileName) {
     string check;
-    cout << "Ââåäèòå íàçâàíèå ôèëüìà äëÿ ïîèñêà" << endl;
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã¤Ã«Ã¿ Ã¯Ã®Ã¨Ã±ÃªÃ " << endl;
     cin >> check;
     ifstream file;
     int n, s = 0;
     char c;
     Film *film;
     film = new Film;
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file.seekg(0, ios_base::end);
     n = file.tellg();
     file.seekg(0);
-    cout << "Ñïèñîê ôèëüìîâ ïî âàøåìó çàïðîñó:" << endl;
+    cout << "Ã‘Ã¯Ã¨Ã±Ã®Ãª Ã´Ã¨Ã«Ã¼Ã¬Ã®Ã¢ Ã¯Ã® Ã¢Ã Ã¸Ã¥Ã¬Ã³ Ã§Ã Ã¯Ã°Ã®Ã±Ã³:" << endl;
     do
     {
         file >> *film;
@@ -128,23 +131,24 @@ void searchfilm_name() {
     file.close();
 }
 
-void searchfilm_genre() {
+void searchfilm_genre(string fileName) {
     string check;
-    cout << "Ââåäèòå æàíð ôèëüìà äëÿ ïîèñêà" << endl;
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¦Ã Ã­Ã° Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã¤Ã«Ã¿ Ã¯Ã®Ã¨Ã±ÃªÃ " << endl;
     cin >> check;
     ifstream file;
     int n, s = 0;
     char c;
     Film *film;
     film = new Film;
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file.seekg(0, ios_base::end);
     n = file.tellg();
     file.seekg(0);
-    cout << "Ñïèñîê ôèëüìîâ ïî âàøåìó çàïðîñó:" << endl;
+    cout << "Ã‘Ã¯Ã¨Ã±Ã®Ãª Ã´Ã¨Ã«Ã¼Ã¬Ã®Ã¢ Ã¯Ã® Ã¢Ã Ã¸Ã¥Ã¬Ã³ Ã§Ã Ã¯Ã°Ã®Ã±Ã³:" << endl;
     do
     {
         file >> *film;
@@ -161,14 +165,15 @@ void searchfilm_genre() {
     file.close();
 }
 
-void listfilm() {
+void listfilm(string fileName) {
     fstream file;
     int n, s = 0;
     Film *film;
     film = new Film;
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
         
     }
     file.seekg(0, ios_base::end);
@@ -186,19 +191,20 @@ void listfilm() {
     file.close();
 }
 
-void changefilm() {
+void changefilm(string fileName) {
     string changename;
     string archive;
-    cout << "Ââåäèòå íàçâàíèå ôèëüìà êîòîðûé õîòèòå èçìåíèòü: ";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã´Ã¨Ã«Ã¼Ã¬Ã  ÃªÃ®Ã²Ã®Ã°Ã»Ã© ÃµÃ®Ã²Ã¨Ã²Ã¥ Ã¨Ã§Ã¬Ã¥Ã­Ã¨Ã²Ã¼: ";
     cin >> changename;
     fstream file;
     int n, s = 0;
     char c;
     Film* film;
     film = new Film;
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file.seekg(0, ios_base::end);
     n = file.tellg();
@@ -208,8 +214,8 @@ void changefilm() {
         s = file.tellg();
         if (changename == film->GetName()) {
             film->Print();
-            cout << "×òî âû õîòèòå èçìåíèòü?"<<endl;
-            cout << "1)Íàçâàíèå" << endl << "2)Æàíð" << endl << "3)Ðåéòèíã" << endl << "4)Ñòîèìîñòü áèëåòà" << endl;
+            cout << "Ã—Ã²Ã® Ã¢Ã» ÃµÃ®Ã²Ã¨Ã²Ã¥ Ã¨Ã§Ã¬Ã¥Ã­Ã¨Ã²Ã¼?"<<endl;
+            cout << "1)ÃÃ Ã§Ã¢Ã Ã­Ã¨Ã¥" << endl << "2)Ã†Ã Ã­Ã°" << endl << "3)ÃÃ¥Ã©Ã²Ã¨Ã­Ã£" << endl << "4)Ã‘Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼ Ã¡Ã¨Ã«Ã¥Ã²Ã " << endl;
             int c;
             cin >> c;
             string newname;
@@ -221,33 +227,33 @@ void changefilm() {
             switch (c)
             {
             case 1:
-                cout<<"Ââåäèòå íîâîå íàçâàíèå: ";
+                cout<<"Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã®Ã¥ Ã­Ã Ã§Ã¢Ã Ã­Ã¨Ã¥: ";
                 cin >> newname;
                 archive += newname + " " + film->GetGenre() + " " + rattingstr + " " + pricestr + "\n";
-                cout << "Íàçâàíèå ôèëüìà óñïåøíî èçìåíåíî!"<<endl;
+                cout << "ÃÃ Ã§Ã¢Ã Ã­Ã¨Ã¥ Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã¨Ã§Ã¬Ã¥Ã­Ã¥Ã­Ã®!"<<endl;
                 break;
             case 2:
-                cout << "Ââåäèòå íîâûé æàíð: ";
+                cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã¦Ã Ã­Ã°: ";
                 cin >> newgenre;
                 archive += film->GetName() + " " + newgenre + " " + rattingstr + " " + pricestr + "\n";
-                cout << "Æàíð ôèëüìà óñïåøíî èçìåíåí!" << endl;
+                cout << "Ã†Ã Ã­Ã° Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã¨Ã§Ã¬Ã¥Ã­Ã¥Ã­!" << endl;
                 break;
             case 3:
-                cout << "Ââåäèòå íîâûé ðåéòèíã: ";
+                cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã°Ã¥Ã©Ã²Ã¨Ã­Ã£: ";
                 cin >> newratting;
                 rattingstr = to_string(newratting);
                 archive += film->GetName() + " " + film->GetGenre() + " " + rattingstr + " " + pricestr + "\n";
-                cout << "Ðåéòèíã ôèëüìà óñïåøíî èçìåíåí!" << endl;
+                cout << "ÃÃ¥Ã©Ã²Ã¨Ã­Ã£ Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã¨Ã§Ã¬Ã¥Ã­Ã¥Ã­!" << endl;
                 break;
             case 4:
-                cout << "Ââåäèòå íîâóþ ñòîèìîñòü: ";
+                cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã³Ã¾ Ã±Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼: ";
                 cin >> newprice;
                 pricestr = to_string(newprice);
                 archive += film->GetName() + " " + film->GetGenre() + " " + rattingstr + " " + pricestr + "\n";
-                cout << "Ñòîèìîñòü ôèëüìà óñïåøíî èçìåíåíà!" << endl;
+                cout << "Ã‘Ã²Ã®Ã¨Ã¬Ã®Ã±Ã²Ã¼ Ã´Ã¨Ã«Ã¼Ã¬Ã  Ã³Ã±Ã¯Ã¥Ã¸Ã­Ã® Ã¨Ã§Ã¬Ã¥Ã­Ã¥Ã­Ã !" << endl;
                 break;
             default:
-                cout << "Îøèáêà" << endl;
+                cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ " << endl;
 
             }
         }
@@ -259,9 +265,10 @@ void changefilm() {
         }
     } while (s < n - 5);
     file.close();
-    file.open("test.txt");
+    file.open(fileName);
     if (!file) {
-        cout << "Îøèáêà ðàáîòû ñ ôàéëîì" << endl;
+        cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ  Ã°Ã Ã¡Ã®Ã²Ã» Ã± Ã´Ã Ã©Ã«Ã®Ã¬" << endl;
+        return;
     }
     file << archive;
     file.close();
@@ -283,7 +290,7 @@ int menu_select()
     do
     {
         cout << "---------------------------------------------------------------------------------------------------------------" << endl;
-        cout << "1 - Äîáàâèòü ôèëüì" << endl << "2 - Ñïèñîê ôèëüìîâ" << endl << "3 - Ïîèñê ôèëüìà" << endl << "4 - Óäàëèòü ôèëüì" << endl << "5 - Èçìåíèòü ôèëüì" << endl << "6 - âûõîä" << endl << "Âàø âûáîð: ";
+        cout << "1 - Ã„Ã®Ã¡Ã Ã¢Ã¨Ã²Ã¼ Ã´Ã¨Ã«Ã¼Ã¬" << endl << "2 - Ã‘Ã¯Ã¨Ã±Ã®Ãª Ã´Ã¨Ã«Ã¼Ã¬Ã®Ã¢" << endl << "3 - ÃÃ®Ã¨Ã±Ãª Ã´Ã¨Ã«Ã¼Ã¬Ã " << endl << "4 - Ã“Ã¤Ã Ã«Ã¨Ã²Ã¼ Ã´Ã¨Ã«Ã¼Ã¬" << endl << "5 - ÃˆÃ§Ã¬Ã¥Ã­Ã¨Ã²Ã¼ Ã´Ã¨Ã«Ã¼Ã¬" << endl << "6 - Ã¢Ã»ÃµÃ®Ã¤" << endl << "Ã‚Ã Ã¸ Ã¢Ã»Ã¡Ã®Ã°: ";
         cin >> s;
         c = atoi(s);
         cout << "---------------------------------------------------------------------------------------------------------------" << endl;
