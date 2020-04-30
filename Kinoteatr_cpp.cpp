@@ -6,7 +6,7 @@
 using namespace std;
 bool work=true;
 
-int main()
+int main(int argc, char * argv[])
 {
     setlocale(LC_CTYPE, "Russian");
     char choice;
@@ -14,15 +14,15 @@ int main()
     while (work) {
         choice = menu_select();
         switch (choice) {
-        case 1: addfilm();
+        case 1: addfilm(string(argv[1]));
             break;
-        case 2: listfilm();
+        case 2: listfilm(string(argv[1]));
             break;
         case 3: searchfilm();
             break;
-        case 4: deletefilm();
+        case 4: deletefilm(string(argv[1]));
             break;
-        case 5: changefilm();
+        case 5: changefilm(string(argv[1]));
             break;
         case 6: exit(0);
             return 0;
